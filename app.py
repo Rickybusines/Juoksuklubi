@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 import db
 import config
+import items
 
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
+
     return render_template("index.html")
 
 @app.route("/new_item")
@@ -26,9 +28,7 @@ def create_item():
     pace = request.form["pace"]
     user_id = session["user_id"]
 
-    sql = """INSERT INTO items (title, description, length, pace, user_id) 
-            VALUES (?, ?, ?, ?, ?)"""
-    db.execute(sql, [title, description, length, pace, user_id])
+    items.add_item(title, length, pace, description, user_id)
 
     return redirect("/")
 
