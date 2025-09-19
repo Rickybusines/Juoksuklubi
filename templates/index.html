@@ -35,6 +35,14 @@
   <p>
     <a href="/new_item">Uusi ilmoitus</a>
   </p>
+  <h2>Ilmoitukset</h2>
+  <ul> 
+    {% for item in items%}
+    <Li><a href="/item/{{item.id}}">{{item.title}}</a></Li>
+    {%endfor%}
+
+  </ul>
+
 </body>
 
 </html>
