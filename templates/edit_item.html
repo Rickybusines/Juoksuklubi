@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ilmoituksen muokkaus</title>
+</head>
+
+<body>
+    <h1>Ilmoituksen muokkaus</h1>
+  <form action="/update_item" method="post">
+    <p>
+      Lenkin sijainti: <br />
+      <input type="text" name="title" value="{{ item.title }}"/>
+    </p>
+
+    <p>
+      Matkan pituus: <br />
+      <input type="text" name="length" size="5" value="{{ item.length }}"/> km
+    </p>
+
+    <p>
+      Matkan vauhti: <br />
+      <input type="text" name="pace" size="5" value="{{ item.pace }}"/> min/km
+    </p>
+
+    <p>
+    Lenkin reititys: <br />
+    <textarea name="description" rows="10" cols="100">{{item.description}}</textarea>
+    </p>
+    <input type="submit" value="Valmis" />
+    <input type="hidden" name="item_id" value="{{ item.id }}"/>
+  </form>
+      <p>
+        <a href="/">Paluu etusivulle</a>
+    </p>
+</body>
+
+</html>
