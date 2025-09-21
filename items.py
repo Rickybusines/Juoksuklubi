@@ -6,7 +6,7 @@ def add_item(title, length, pace, description, user_id):
     db.execute(sql, [title, description, length, pace, user_id])
 
 def get_items():
-    sql = "SELECT id, title FROM items ORDER BY id DESC"
+    sql = "SELECT id, title, length, pace FROM items ORDER BY id DESC"
     return db.query(sql)
 
 def get_item(item_id):

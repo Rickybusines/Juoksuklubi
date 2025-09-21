@@ -36,12 +36,17 @@
     <a href="/new_item">Uusi ilmoitus</a>
   </p>
   <h2>Ilmoitukset</h2>
-  <ul> 
+
     {% for item in items%}
-    <Li><a href="/item/{{item.id}}">{{item.title}}</a></Li>
+    <p>
+    <a href="/item/{{item.id}}">{{item.title}}</a>
+    <br />
+    Pituus: {{ item.length }} km Tahti: {{ item.pace }} 
+    </p>
+    <hr />
     {%endfor%}
 
-  </ul>
+  
 
 </body>
 
