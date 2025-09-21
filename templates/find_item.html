@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Etsi ilmoitus</title>
+</head>
+
+<body>
+    <p>
+        <a href="/">Paluu etusivulle</a>
+    </p>
+    <h1>Etsi ilmoitus</h1>
+
+    <form action="/find_item" method="get">
+    <p>
+        Hakusana: <input type="text" name="query" value="{{ query }}">
+    </p>
+    <input type="submit" value="Lähetä">
+    </form>
+
+    {% if query %}
+    <h2>Tulokset:</h2>
+
+    {% for item in results %}
+    <p>
+    <a href="/item/{{item.id}}">{{item.title}}</a>
+    <br />
+    Pituus: {{ item.length }} km Tahti: {{ item.pace }} min/km
+    </p>
+    <hr />
+    {%endfor%}
+    {% endif %}
+</body>
+
+</html>
