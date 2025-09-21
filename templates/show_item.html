@@ -3,14 +3,15 @@
 <html>
 
 <head>
-  <title>{{item.title}}</title>
+  <title>{{ item.title }}</title>
 </head>
 
 <body>
-    <h1>{{item.title}}</h1>
+    <h1>{{ item.title }}</h1>
       {% if session.user_id == item.user_id %}
   <p>
     <a href="/edit_item/{{ item.id }}">Muokkaa ilmoitusta</a>
+    <a href="/remove_item/{{ item.id }}">Poista ilmoitus</a>
   </p>
   {% endif %}
     <p>
