@@ -8,3 +8,13 @@
 - Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja ja käyttäjän lisäämät ilmoitukset.
 - Käyttäjä pystyy valitsemaan ilmoitukselle missä tahdissa haluaa juosta, esim hidas, keskinopea tai nopeaa lenkki.
 - Käyttäjä pystyy ilmoittautumaan mukaan lenkille
+
+Välipalautukseen 2 toteutettu: 
+
+  -Etusivulla listattu ilmoitukset. Päivämäärät tekemättä
+  
+  -Käyttäjä voi luoda tunnukset, kirjautua sisään ja kirjautua ulos
+  
+  -Käyttäjä voi luoda, muokata ja poistaa ilmoituksia
+  
+  -Käyttäjä voi hakea ilmoituksia otsikon tai kuvauksen perusteella
