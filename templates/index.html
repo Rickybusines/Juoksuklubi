@@ -13,6 +13,15 @@
     Olet kirjautunut nimellä {{ session.username }}, id-numerosi on {{ session.user_id }}
   </p>
 
+    <p>
+    <a href="/logout">Kirjaudu ulos</a>
+  </p>
+  <p>
+    <a href="/new_item">Uusi ilmoitus</a>
+    <a href="/">Omat ilmoitukset</a>
+
+  </p>
+
   {% else %}
   <form action="/login" method="post">
     <p>
@@ -25,16 +34,13 @@
     </p>
     <input type="submit" value="Kirjaudu" />
   </form>
-  {% endif %}
 
   <p>
-    <a href="/login">Kirjaudu sisään</a>
     <a href="/register">Luo tunnus</a>
-    <a href="/logout">Kirjaudu ulos</a>
   </p>
+  {% endif %}
   <p>
-    <a href="/new_item">Uusi ilmoitus</a>
-    <a href="/find_item">Hae</a>
+    <a href="/find_item">Hae ilmoituksia</a>
   </p>
   <h2>Ilmoitukset</h2>
 
