@@ -18,3 +18,11 @@ Välipalautukseen 2 toteutettu:
   -Käyttäjä voi luoda, muokata ja poistaa ilmoituksia
   
   -Käyttäjä voi hakea ilmoituksia otsikon tai kuvauksen perusteella
+
+Välipalautukseen 3 toteutettu: 
+
+  -Lisätty järkevämmin suunnistusta sivustolla
+  
+  -Etusivua räätälöity riippuen onko käyttäjä kirjautunut sisään
+  
+  -Lisätty id varmistuksia jotka ehkäisee ettei väärä käyttäjä voi muokata ilmoituksia
