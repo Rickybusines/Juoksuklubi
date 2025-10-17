@@ -6,7 +6,16 @@ def add_item(title, length, pace, description, user_id):
     db.execute(sql, [title, description, length, pace, user_id])
 
 def get_items():
-    sql = "SELECT id, title, length, pace FROM items ORDER BY id DESC"
+    sql = """SELECT items.id, 
+                    items.title, 
+                    items.length, 
+                    items.pace,
+                    users.username,
+                    users.id AS user_id
+                    FROM items
+                    JOIN users ON items.user_id = users.id
+                    GROUP BY items.id
+                    ORDER BY items.id DESC"""
     return db.query(sql)
 
 def get_item(item_id):
@@ -15,6 +24,7 @@ def get_item(item_id):
                     items.description,
                     items.pace,
                     items.length,
+                    users.username,
                     users.id AS user_id
             FROM items, users
             WHERE items.user_id = users.id AND
