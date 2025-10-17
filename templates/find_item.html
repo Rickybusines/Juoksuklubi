@@ -16,6 +16,7 @@
     <p>
         Hakusana: <input type="text" name="query" value="{{ query }}">
     </p>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" value="Lähetä">
     </form>
 
