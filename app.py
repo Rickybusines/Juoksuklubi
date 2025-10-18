@@ -39,7 +39,8 @@ def show_item(item_id):
     item = items.get_item(item_id)
     if not item:
         abort(404)
-    return render_template("show_item.html", item=item)
+    attendances = items.get_attendance(item_id)
+    return render_template("show_item.html", item=item, attendances=attendances)
 
 @app.route("/find_item")
 def find_item():
@@ -69,6 +70,21 @@ def create_item():
     items.add_item(title, length, pace, description, user_id)
 
     return redirect("/")
+
+@app.route("/create_attendance", methods=["POST"])
+def create_attendance():
+    check_login()
+    item_id = request.form["item_id"]
+    item = items.get_item(item_id)
+    if not item:
+        abort(403)
+    user_id = session["user_id"]
+
+    items.add_attendance(item_id, user_id)
+
+    return redirect("/item/" + str(item_id))
+
+
 
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):

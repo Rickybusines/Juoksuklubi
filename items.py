@@ -51,3 +51,15 @@ def find_item(query):
             ORDER BY id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like])
+
+def add_attendance(item_id, user_id):
+    sql = """INSERT INTO attendances (item_id, user_id)
+        VALUES (?, ?)"""
+    db.execute(sql, [item_id, user_id])
+
+def get_attendance(item_id):
+    sql = """SELECT attendances.item_id, users.id AS users_id, users.username
+            FROM attendances
+            JOIN users ON attendances.user_id = users.id
+            WHERE attendances.item_id = ? """
+    return db.query(sql, [item_id])

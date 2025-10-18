@@ -23,6 +23,18 @@
     <p>
         Tempo: {{item.pace}} min/km
     </p>
+    <h2>Ilmoittautumiset</h2>
+    <ul>
+      {% for attendance in attendances %}
+      <li><a href="/user/{{ attendance.user_id }}">{{ attendance.username }}</a></li>
+      {% else %}
+        <li>Kukaan ei ole ilmoittautunut</li>
+      {% endfor %}
+    </ul>
+    <form action="/create_attendance" method="POST">
+      <input type="hidden" name="item_id" value="{{ item.id }}"/>
+      <input type="submit" value="Liity mukaan" />
+    </form>
     <p>
         <a href="/">Paluu etusivulle</a>
     </p>

@@ -12,3 +12,9 @@ CREATE TABLE items(
     length INTEGER,
     user_id INTEGER REFERENCES users
 );
+
+CREATE TABLE attendances (
+    id INTEGER PRIMARY KEY,
+    item_id INTEGER REFERENCES items,
+    user_id INTEGER REFERENCES users
+);
