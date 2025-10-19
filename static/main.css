@@ -1,0 +1,8 @@
+body {
+  margin: auto;
+  max-width: 50em;
+  font-family: sans-serif;
+  background-color: rgb(194, 166, 194);
+  color:#070101;
+  box-sizing: border-box;  
+}
