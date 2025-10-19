@@ -32,7 +32,8 @@ def show_user(user_id):
     if not user:
         abort(404)
     items = users.get_items(user_id)
-    return render_template("show_user.html", user=user, items=items)
+    attendances = users.get_attendances(user_id)
+    return render_template("show_user.html", user=user, items=items, attendances=attendances)
 
 @app.route("/item/<int:item_id>")
 def show_item(item_id):
@@ -40,7 +41,10 @@ def show_item(item_id):
     if not item:
         abort(404)
     attendances = items.get_attendance(item_id)
-    return render_template("show_item.html", item=item, attendances=attendances)
+    attended = False
+    if "user_id" in session:
+        attended = items.has_attended(item_id, session["user_id"])
+    return render_template("show_item.html", item=item, attendances=attendances, attended=attended)
 
 @app.route("/find_item")
 def find_item():
@@ -74,13 +78,25 @@ def create_item():
 @app.route("/create_attendance", methods=["POST"])
 def create_attendance():
     check_login()
+    check_csrf()
     item_id = request.form["item_id"]
     item = items.get_item(item_id)
     if not item:
-        abort(403)
+        abort(404)
     user_id = session["user_id"]
 
     items.add_attendance(item_id, user_id)
+
+    return redirect("/item/" + str(item_id))
+
+@app.route("/cancel_attendance", methods=["POST"])
+def cancel_attendance():
+    check_login()
+    check_csrf()
+    item_id = request.form["item_id"]
+    user_id = session["user_id"]
+
+    items.cancel_attendance(item_id, user_id)
 
     return redirect("/item/" + str(item_id))
 

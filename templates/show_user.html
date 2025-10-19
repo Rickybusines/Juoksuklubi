@@ -11,6 +11,9 @@
     <p>
         Käyttäjällä on yhteensä {{ items | count }} ilmoitusta.
     </p>
+    <p>
+        Käyttäjällä on osallistunut yhteensä {{ attendances | count }} lenkille.
+    </p>
     <h2>Ilmoitukset</h2>
     <ul>
         {% for item in items %}

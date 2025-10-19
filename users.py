@@ -8,3 +8,7 @@ def get_user(user_id):
 def get_items(user_id):
     sql = "SELECT id, title FROM items WHERE user_id = ? ORDER BY id DESC"
     return db.query(sql, [user_id])
+
+def get_attendances(user_id):
+    sql = "SELECT * FROM attendances WHERE user_id = ?"
+    return db.query(sql, [user_id])

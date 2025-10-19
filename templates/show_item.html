@@ -26,15 +26,26 @@
     <h2>Ilmoittautumiset</h2>
     <ul>
       {% for attendance in attendances %}
-      <li><a href="/user/{{ attendance.user_id }}">{{ attendance.username }}</a></li>
+      <li><a href="/user/{{ item.user_id }}">{{ attendance.username }}</a></li>
       {% else %}
         <li>Kukaan ei ole ilmoittautunut</li>
       {% endfor %}
     </ul>
-    <form action="/create_attendance" method="POST">
-      <input type="hidden" name="item_id" value="{{ item.id }}"/>
-      <input type="submit" value="Liity mukaan" />
-    </form>
+    {% if session.user_id and session.user_id != item.user_id %}
+      {% if not attended %}
+        <form action="/create_attendance" method="POST">
+          <input type="hidden" name="item_id" value="{{ item.id }}"/>
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+          <input type="submit" value="Liity mukaan" />
+        </form>
+      {% else %}
+        <form action="/cancel_attendance" method="POST">
+          <input type="hidden" name="item_id" value="{{ item.id }}">
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          <input type="submit" value="Peru osallistuminen">
+        </form>
+      {% endif %}
+    {% endif %}
     <p>
         <a href="/">Paluu etusivulle</a>
     </p>

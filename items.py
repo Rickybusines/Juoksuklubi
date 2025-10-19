@@ -63,3 +63,12 @@ def get_attendance(item_id):
             JOIN users ON attendances.user_id = users.id
             WHERE attendances.item_id = ? """
     return db.query(sql, [item_id])
+
+def has_attended(item_id, user_id):
+    sql = "SELECT 1 FROM attendances WHERE item_id = ? AND user_id = ?"
+    result = db.query(sql, [item_id, user_id])
+    return len(result) > 0
+
+def cancel_attendance(item_id, user_id):
+    sql = "DELETE FROM attendances WHERE item_id = ? AND user_id = ?"
+    db.execute(sql, [item_id, user_id])
