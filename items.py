@@ -62,7 +62,8 @@ def get_attendance(item_id):
             FROM attendances
             JOIN users ON attendances.user_id = users.id
             WHERE attendances.item_id = ? """
-    return db.query(sql, [item_id])
+    rows = db.query(sql, [item_id])
+    return [dict(row) for row in rows]
 
 def has_attended(item_id, user_id):
     sql = "SELECT 1 FROM attendances WHERE item_id = ? AND user_id = ?"

@@ -1,5 +1,6 @@
 import sqlite3
 import secrets
+import re
 from flask import redirect, render_template, request, session, abort
 from flask import Flask
 from werkzeug.security import generate_password_hash
@@ -66,14 +67,23 @@ def create_item():
     check_login()
     check_csrf()
     title = request.form["title"]
+    if not title or len(title) > 20:
+        abort(403)
     description = request.form["description"]
     length = request.form["length"]
+    if not re.search("^[1-9][0-9]{0,3}$", length):
+        abort(403)
     pace = request.form["pace"]
+    if not re.search("^[1-9][0-9]{0,3}$", pace):
+        abort(403)
     user_id = session["user_id"]
 
     items.add_item(title, length, pace, description, user_id)
 
-    return redirect("/")
+    item_id = db.last_insert_id()
+    items.add_attendance(item_id, user_id)
+
+    return redirect("/item/" + str(item_id))
 
 @app.route("/create_attendance", methods=["POST"])
 def create_attendance():
@@ -165,7 +175,8 @@ def create():
     except sqlite3.IntegrityError:
         return "VIRHE: tunnus on jo varattu"
 
-    return "Tunnus luotu"
+    return redirect("/")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
