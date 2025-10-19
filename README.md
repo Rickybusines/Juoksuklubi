@@ -5,24 +5,28 @@
 - Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan ilmoituksia.
 - Käyttäjä näkee sovellukseen lisätyt ilmoitukset.
 - Käyttäjä pystyy etsimään ilmoituksia ajan, paikan, juoksutahdin ja lenkin pituuden perusteella.
-- Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja ja käyttäjän lisäämät ilmoitukset.
+- Sovelluksessa on käyttäjäsivut, jotka näyttävät käyttäjän tekemät ilmoitukset ja kuinka monelle juoksulle käyttäjä on ilmoittautunut.
 - Käyttäjä pystyy valitsemaan ilmoitukselle missä tahdissa haluaa juosta, esim hidas, keskinopea tai nopeaa lenkki.
 - Käyttäjä pystyy ilmoittautumaan mukaan lenkille
+- Käyttäjä pystyy perumaan ilmoittautumisen
 
-Välipalautukseen 2 toteutettu: 
 
-  -Etusivulla listattu ilmoitukset. Päivämäärät tekemättä
-  
-  -Käyttäjä voi luoda tunnukset, kirjautua sisään ja kirjautua ulos
-  
-  -Käyttäjä voi luoda, muokata ja poistaa ilmoituksia
-  
-  -Käyttäjä voi hakea ilmoituksia otsikon tai kuvauksen perusteella
+Sovelluksen testaus:
 
-Välipalautukseen 3 toteutettu: 
+- Asenna flask-kirjasto terminaalissa:
 
-  -Lisätty järkevämmin suunnistusta sivustolla
-  
-  -Etusivua räätälöity riippuen onko käyttäjä kirjautunut sisään
-  
-  -Lisätty id varmistuksia jotka ehkäisee ettei väärä käyttäjä voi muokata ilmoituksia
+$ pip install flask
+
+- Luo itsellesi kansio
+- Mene kansioon terminaalin kautta
+- Lataa sovellus Githubista: $ git clone https://github.com/Rickybusines/Juoksuklubi.git
+- Luo virtuaaliympäristö: $ python3 -m venv venv
+- Aktivoi virtuaaliympäristö: $ source venv/bin/activate
+
+Luo tietokantaan taulut:
+
+  - $ sqlite3 database.db < schema.sql
+  - $ sqlite3 database.db < init.sql
+
+Käynnistä sovellus:
+$ flask run
