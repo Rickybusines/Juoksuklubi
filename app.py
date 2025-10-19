@@ -9,6 +9,7 @@ import db
 import config
 import items
 import users
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -69,16 +70,27 @@ def create_item():
     title = request.form["title"]
     if not title or len(title) > 20:
         abort(403)
-    description = request.form["description"]
+    date = request.form["date"]
+    if not date:
+        abort(403)
+    time = request.form["time"]
+    if not time:
+        abort(403)
     length = request.form["length"]
     if not re.search("^[1-9][0-9]{0,3}$", length):
         abort(403)
     pace = request.form["pace"]
     if not re.search("^[1-9][0-9]{0,3}$", pace):
         abort(403)
+    description = request.form["description"]
+    pace = request.form["pace"]
+    if not re.search("^[1-9][0-9]{0,3}$", pace):
+        abort(403)
+
+    day_time = f"{date} {time}"
     user_id = session["user_id"]
 
-    items.add_item(title, length, pace, description, user_id)
+    items.add_item(title, length, pace, description, user_id, day_time)
 
     item_id = db.last_insert_id()
     items.add_attendance(item_id, user_id)
@@ -127,13 +139,26 @@ def update_item():
     item = items.get_item(item_id)
     if item["user_id"] != session["user_id"]:
         abort(403)
-            
     title = request.form["title"]
+    if not title or len(title) > 20:
+        abort(403)
+    date = request.form["date"]
+    if not date:
+        abort(403)
+    time = request.form["time"]
+    if not time:
+        abort(403)
     length = request.form["length"]
+    if not re.search("^[1-9][0-9]{0,3}$", length):
+        abort(403)
     pace = request.form["pace"]
+    if not re.search("^[1-9][0-9]{0,3}$", pace):
+        abort(403)
     description = request.form["description"]
 
-    items.update_item(item_id, title, length, pace, description)
+    day_time = f"{date} {time}"
+
+    items.update_item(item_id, title, length, pace, description, day_time)
 
     return redirect("/item/" + str(item_id))
 

@@ -11,6 +11,7 @@ CREATE TABLE items(
     pace INTEGER,
     length INTEGER,
     user_id INTEGER REFERENCES users
+    day_time TEXT
 );
 
 CREATE TABLE attendances (
